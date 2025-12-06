@@ -1,30 +1,40 @@
-/* Modern Scientific Calculator - Sleek Professional Design */
+/* Advanced Scientific Calculator - Executive Professional Design */
 
-/* CSS Custom Properties for Modern Theme */
+/* CSS Custom Properties for Executive Theme */
 :root {
-    --primary-bg: #1a1a1a;
-    --secondary-bg: #252525;
-    --accent-bg: #2d2d2d;
-    --display-bg: #121212;
-    --border-color: #33333;
-    --text-primary: #ffffff;
-    --text-secondary: #b3b3b3;
-    --text-muted: #666666;
-    --shadow-light: 0 4px 6px rgba(0, 0, 0, 0.1);
-    --shadow-medium: 0 10px 15px rgba(0, 0, 0, 0.2);
-    --shadow-heavy: 0 20px 25px rgba(0, 0, 0.3);
-    --gradient-bg: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    --radius-sm: 8px;
-    --radius-md: 12px;
-    --radius-lg: 16px;
-    --radius-xl: 20px;
-    --number-bg: #333333;
-    --operator-bg: #ff9500;
-    --function-bg: #007aff;
-    --constant-bg: #34c759;
-    --clear-bg: #ff3b30;
-    --equals-bg: #00d067;
-    --zero-bg: #333333;
+    --primary-bg: #ffffff;
+    --secondary-bg: #f8fafc;
+    --accent-bg: #f1f5f9;
+    --display-bg: #1a202c; /* Darker display background */
+    --display-text: #e2e8f0;
+    --border-color: #e2e8f0;
+    --text-primary: #1a202c; /* Darker text */
+    --text-secondary: #4a5568;
+    --text-muted: #718096;
+    --shadow-light: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0.14);
+    --shadow-medium: 0 4px 6px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.08);
+    --shadow-heavy: 0 15px 25px rgba(0, 0, 0, 0.1), 0 5px 10px rgba(0, 0, 0, 0.05);
+    --gradient-bg: linear-gradient(135deg, #f0f4f8 0%, #d9e2ec 100%); /* Softer gradient */
+    --radius-sm: 6px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --radius-xl: 16px;
+    --number-bg: #edf2f7;
+    --number-hover: #e2e8f0;
+    --operator-bg: #4299e1; /* Brighter blue */
+    --operator-hover: #3182ce;
+    --function-bg: #805ad5; /* Richer purple */
+    --function-hover: #6b46c1;
+    --constant-bg: #38b2ac; /* Teal */
+    --constant-hover: #319795;
+    --clear-bg: #fc8181; /* Lighter red */
+    --clear-hover: #e53e3e;
+    --equals-bg: #48bb78; /* Brighter green */
+    --equals-hover: #38a169;
+    --zero-bg: #edf2f7;
+    --zero-hover: #e2e8f0;
+    --active-mode: #4299e1;
+    --active-mode-text: white;
 }
 
 /* Global Styles */
@@ -41,20 +51,11 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 0;
-    margin: 0;
+    padding: 20px;
     color: var(--text-primary);
     font-weight: 400;
-    line-height: 1.5;
+    line-height: 1.6; /* Improved line-height */
     background-size: 400% 400%;
-    animation: gradientBG 15s ease infinite;
-    overflow: hidden;
-}
-
-@keyframes gradientBG {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
 }
 
 /* Calculator Main Layout */
@@ -62,50 +63,46 @@ body {
     background: var(--primary-bg);
     border-radius: var(--radius-xl);
     box-shadow: var(--shadow-heavy);
-    width: 90%;
-    max-width: 1000px;
-    height: 90vh;
+    width: 100%;
+    max-width: 420px; /* Slightly wider */
     margin: 20px auto;
     overflow: hidden;
     display: flex;
     flex-direction: column;
     position: relative;
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(25, 255, 255, 0.1);
+    border: 1px solid var(--border-color); /* Use variable */
 }
 
 /* Fixed Display Panel */
 .display-panel {
-    background: var(--display-bg);
-    padding: 28px 20px;
-    border-bottom: 1px solid var(--border-color);
-    position: sticky;
-    top: 0;
-    z-index: 100;
+    background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%); /* Adjusted gradient */
+    padding: 36px 28px; /* Increased padding */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
 }
 
 .expression-input {
-    font-size: 32px;
+    font-size: 38px; /* Slightly larger */
     font-weight: 300;
-    color: var(--text-primary);
-    min-height: 56px;
+    color: var(--display-text);
+    min-height: 65px; /* Slightly taller */
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    margin-bottom: 16px;
-    padding: 16px 20px;
-    background: rgba(0, 0, 0, 0.2);
+    margin-bottom: 18px; /* Increased margin */
+    padding: 18px 22px; /* Increased padding */
+    background: rgba(255, 255, 255, 0.08); /* Slightly more prominent background */
     border-radius: var(--radius-lg);
-    border: 1px solid rgba(255, 255, 255, 0.1);
     position: relative;
     transition: all 0.2s ease;
-    font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', monospace;
-    letter-spacing: -0.025em;
+    font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace; /* More modern monospace stack */
+    letter-spacing: -0.03em; /* Tighter letter spacing */
+    border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 .expression-input:focus-within {
-    border-color: rgba(25, 255, 255, 0.3);
-    box-shadow: 0 0 2px rgba(102, 126, 234, 0.3);
+    border-color: var(--operator-bg); /* Use accent color for focus */
+    box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.3); /* Match accent color */
 }
 
 #expressionText {
@@ -119,11 +116,11 @@ body {
 }
 
 .cursor {
-    color: var(--operator-bg);
+    color: var(--operator-bg); /* Use accent color */
     font-weight: 600;
-    animation: blink 1.2s infinite;
-    font-size: 32px;
-    margin-left: 2px;
+    animation: blink 1.2s step-end infinite; /* Step-end for sharper blink */
+    font-size: 38px; /* Match expression input size */
+    margin-left: 3px;
 }
 
 @keyframes blink {
@@ -132,59 +129,58 @@ body {
 }
 
 .live-preview {
-    font-size: 18px;
+    font-size: 19px; /* Slightly larger */
     font-weight: 300;
-    color: var(--text-secondary);
+    color: var(--text-muted);
     text-align: right;
-    min-height: 28px;
-    padding: 8px 20px;
-    background: rgba(255, 255, 255, 0.05);
+    min-height: 30px; /* Slightly taller */
+    padding: 9px 22px; /* Increased padding */
+    background: rgba(255, 255, 255, 0.06);
     border-radius: var(--radius-md);
-    border: 1px solid rgba(25, 255, 255, 0.1);
-    font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', monospace;
+    font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
     transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 /* Fixed Mode Switcher */
 .mode-switcher {
     display: flex;
-    background: var(--accent-bg);
+    background: #ffffff;
     border-bottom: 1px solid var(--border-color);
-    padding: 0 20px;
-    gap: 8px;
-    position: sticky;
-    top: 86px; /* Account for display panel height */
-    z-index: 99;
+    padding: 8px; /* Increased padding */
+    gap: 6px;
+    position: relative;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08); /* More subtle shadow */
 }
 
 .mode-btn {
     flex: 1;
-    padding: 12px 16px;
+    padding: 16px 10px; /* Increased padding */
     border: none;
     background: transparent;
     color: var(--text-secondary);
-    font-size: 13px;
+    font-size: 15px; /* Slightly larger */
     font-weight: 500;
     cursor: pointer;
     transition: all 0.2s ease;
     border-radius: var(--radius-md);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+    text-transform: capitalize;
+    letter-spacing: 0.3px; /* Slightly more letter spacing */
     position: relative;
     overflow: hidden;
+    border: 1px solid transparent;
 }
 
 .mode-btn.active {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
+    background: var(--active-mode);
+    color: var(--active-mode-text);
     box-shadow: var(--shadow-light);
-    transform: translateY(-1px);
+    border-color: var(--active-mode); /* Active border matches background */
 }
 
 .mode-btn:hover:not(.active) {
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--secondary-bg);
     color: var(--text-primary);
-    transform: translateY(-1px);
 }
 
 /* Scrollable Content Area */
@@ -193,12 +189,12 @@ body {
     overflow-y: auto;
     display: flex;
     flex-direction: column;
-    min-height: 0; /* Allows flex child to be scrollable */
+    min-height: 0;
 }
 
 /* Keys Panel - Modern Design */
 .keys-panel {
-    padding: 20px;
+    padding: 28px; /* Increased padding */
     background: var(--primary-bg);
     flex: 1;
 }
@@ -206,8 +202,8 @@ body {
 .key-row {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 10px;
-    gap: 8px;
+    margin-bottom: 14px; /* Increased margin */
+    gap: 12px; /* Increased gap */
 }
 
 .key-row:last-child {
@@ -216,10 +212,10 @@ body {
 
 .key {
     flex: 1;
-    height: 60px;
+    height: 68px; /* Slightly taller */
     border: none;
     border-radius: var(--radius-lg);
-    font-size: 18px;
+    font-size: 22px; /* Slightly larger */
     font-weight: 500;
     cursor: pointer;
     transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
@@ -232,31 +228,17 @@ body {
     color: var(--text-primary);
     font-family: 'Inter', sans-serif;
     user-select: none;
-}
-
-.key::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(25, 255, 255, 0.1), transparent);
-    transition: left 0.5s;
-}
-
-.key:hover::before {
-    left: 100%;
+    border: 1px solid rgba(0, 0, 0, 0.08); /* Slightly stronger border */
 }
 
 .key:active {
-    transform: translateY(1px);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transform: translateY(2px); /* More pronounced press */
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1); /* Inset shadow for press */
 }
 
-.key:focus {
+.key:focus-visible { /* Using focus-visible for better accessibility */
     outline: none;
-    box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.5);
+    box-shadow: 0 0 0 3px var(--operator-bg), 0 0 0 5px rgba(66, 153, 225, 0.3); /* Dual focus ring */
 }
 
 /* Number Keys */
@@ -266,8 +248,8 @@ body {
 }
 
 .key.number:hover {
-    background: #3d3d3d;
-    transform: translateY(-1px);
+    background: var(--number-hover);
+    transform: translateY(-2px);
     box-shadow: var(--shadow-medium);
 }
 
@@ -278,9 +260,9 @@ body {
 }
 
 .key.operator:hover {
-    background: #ffaa33;
-    transform: translateY(-1px);
-    box-shadow: 0 8px 15px rgba(255, 149, 0, 0.3);
+    background: var(--operator-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px rgba(66, 153, 225, 0.4); /* Enhanced shadow */
 }
 
 /* Function Keys */
@@ -290,9 +272,9 @@ body {
 }
 
 .key.function:hover {
-    background: #0088ff;
-    transform: translateY(-1px);
-    box-shadow: 0 8px 15px rgba(0, 122, 255, 0.3);
+    background: var(--function-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px rgba(128, 90, 213, 0.4); /* Enhanced shadow */
 }
 
 /* Constant Keys */
@@ -302,9 +284,9 @@ body {
 }
 
 .key.constant:hover {
-    background: #40d96b;
-    transform: translateY(-1px);
-    box-shadow: 0 8px 15px rgba(52, 199, 89, 0.3);
+    background: var(--constant-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px rgba(56, 178, 172, 0.4); /* Enhanced shadow */
 }
 
 /* Clear Keys */
@@ -314,23 +296,23 @@ body {
 }
 
 .key.clear:hover {
-    background: #ff5e54;
-    transform: translateY(-1px);
-    box-shadow: 0 8px 15px rgba(255, 59, 48, 0.3);
+    background: var(--clear-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px rgba(252, 129, 129, 0.4); /* Enhanced shadow */
 }
 
 /* Equals Key */
 .key.equals {
     background: var(--equals-bg);
     color: white;
-    font-size: 22px;
+    font-size: 24px; /* Slightly larger */
     font-weight: 600;
 }
 
 .key.equals:hover {
-    background: #00e676;
-    transform: translateY(-1px);
-    box-shadow: 0 8px 15px rgba(0, 208, 103, 0.3);
+    background: var(--equals-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 18px rgba(72, 187, 120, 0.4); /* Enhanced shadow */
 }
 
 /* Zero Button - spans 2 columns */
@@ -340,8 +322,8 @@ body {
 }
 
 .key.zero:hover {
-    background: #3d3d3d;
-    transform: translateY(-1px);
+    background: var(--zero-hover);
+    transform: translateY(-2px);
     box-shadow: var(--shadow-medium);
 }
 
@@ -352,8 +334,8 @@ body {
 }
 
 .key.decimal:hover, .key.parentheses:hover {
-    background: #3d3d3d;
-    transform: translateY(-1px);
+    background: var(--number-hover);
+    transform: translateY(-2px);
     box-shadow: var(--shadow-medium);
 }
 
@@ -361,52 +343,64 @@ body {
 .advanced-panel {
     background: var(--secondary-bg);
     border-top: 1px solid var(--border-color);
-    padding: 20px;
+    padding: 28px; /* Increased padding */
     flex: 1;
+    display: flex;
+    flex-direction: column;
 }
 
 .advanced-tabs {
     display: flex;
-    margin-bottom: 15px;
-    background: var(--accent-bg);
+    margin-bottom: 24px; /* Increased margin */
+    background: var(--primary-bg);
     border-radius: var(--radius-md);
-    padding: 4px;
-    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+    padding: 6px; /* Increased padding */
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.06);
+    border: 1px solid var(--border-color);
 }
 
 .tab-btn {
     flex: 1;
-    padding: 10px;
+    padding: 14px; /* Increased padding */
     border: none;
     background: transparent;
     color: var(--text-secondary);
-    font-size: 14px;
+    font-size: 15px; /* Slightly larger */
     cursor: pointer;
     border-radius: var(--radius-sm);
     transition: all 0.3s ease;
     font-weight: 500;
+    border: 1px solid transparent;
 }
 
 .tab-btn.active {
-    background: var(--primary-bg);
+    background: var(--active-mode);
+    color: var(--active-mode-text);
+    box-shadow: var(--shadow-light);
+    border-color: var(--active-mode);
+}
+
+.tab-btn:hover:not(.active) {
+    background: var(--secondary-bg);
     color: var(--text-primary);
-    box-shadow: 0 2px 4px rgba(0, 0, 0.2);
 }
 
 .tab-content {
-    background: var(--accent-bg);
+    background: var(--primary-bg);
     border-radius: var(--radius-md);
-    padding: 15px;
-    min-height: 200px;
-    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+    padding: 24px; /* Increased padding */
+    min-height: 220px; /* Slightly taller */
+    box-shadow: var(--shadow-light);
+    border: 1px solid var(--border-color);
     flex: 1;
+    overflow-y: auto;
 }
 
 /* Graph Canvas */
 .graph-canvas {
     background: var(--secondary-bg);
     border-top: 1px solid var(--border-color);
-    padding: 20px;
+    padding: 28px; /* Increased padding */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -422,13 +416,13 @@ body {
 }
 
 .graph-controls {
-    margin-top: 15px;
+    margin-top: 18px; /* Increased margin */
     display: flex;
-    gap: 10px;
+    gap: 12px;
 }
 
 .graph-controls button {
-    padding: 8px 15px;
+    padding: 12px 18px; /* Increased padding */
     border: none;
     border-radius: var(--radius-sm);
     background: var(--function-bg);
@@ -436,28 +430,30 @@ body {
     cursor: pointer;
     transition: all 0.2s ease;
     font-family: 'Inter', sans-serif;
+    font-size: 15px; /* Slightly larger */
+    font-weight: 500;
 }
 
 .graph-controls button:hover {
-    background: #0088ff;
+    background: var(--function-hover);
 }
 
 /* History Panel - Modern Design */
 .history-panel {
     background: var(--secondary-bg);
     border-top: 1px solid var(--border-color);
-    max-height: 150px;
+    max-height: 200px; /* Slightly taller */
     overflow-y: auto;
 }
 
 .history-header {
-    padding: 12px 20px;
-    background: var(--accent-bg);
+    padding: 18px 28px; /* Increased padding */
+    background: var(--primary-bg);
     font-weight: 600;
     color: var(--text-primary);
-    font-size: 14px;
+    font-size: 15px; /* Slightly larger */
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.8px; /* More letter spacing */
     border-bottom: 1px solid var(--border-color);
     position: sticky;
     top: 0;
@@ -465,23 +461,23 @@ body {
 }
 
 .history-list {
-    padding: 8px 0;
+    padding: 10px 0;
 }
 
 .history-item {
-    padding: 10px 20px;
+    padding: 14px 28px; /* Increased padding */
     border-bottom: 1px solid var(--border-color);
     cursor: pointer;
     transition: all 0.2s ease;
-    font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', monospace;
-    font-size: 14px;
+    font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+    font-size: 15px; /* Slightly larger */
     color: var(--text-secondary);
 }
 
 .history-item:hover {
-    background: rgba(102, 126, 234, 0.1);
+    background: rgba(66, 153, 225, 0.08); /* Match accent color */
     color: var(--text-primary);
-    transform: translateX(4px);
+    transform: translateX(6px); /* More pronounced slide */
 }
 
 .history-item:last-child {
@@ -490,7 +486,7 @@ body {
 
 /* Scrollbar styling for history */
 .history-panel::-webkit-scrollbar {
-    width: 6px;
+    width: 10px; /* Wider scrollbar */
 }
 
 .history-panel::-webkit-scrollbar-track {
@@ -498,12 +494,12 @@ body {
 }
 
 .history-panel::-webkit-scrollbar-thumb {
-    background: var(--border-color);
-    border-radius: 3px;
+    background: var(--text-muted);
+    border-radius: 5px;
 }
 
 .history-panel::-webkit-scrollbar-thumb:hover {
-    background: var(--text-muted);
+    background: var(--text-primary);
 }
 
 /* Hidden Class */
@@ -514,47 +510,52 @@ body {
 /* Responsive Design */
 @media (max-width: 768px) {
     .calculator {
-        width: 95%;
-        height: 95vh;
+        max-width: 100%;
+        margin: 10px;
     }
 
     .key {
-        height: 50px;
-        font-size: 16px;
+        height: 60px; /* Adjusted */
+        font-size: 20px; /* Adjusted */
     }
 
     .expression-input {
-        font-size: 20px;
+        font-size: 32px; /* Adjusted */
     }
 
     .mode-btn {
-        padding: 12px 8px;
-        font-size: 12px;
+        padding: 14px 8px; /* Adjusted */
+        font-size: 14px; /* Adjusted */
     }
 
-    .advanced-tabs {
-        flex-wrap: wrap;
+    .keys-panel {
+        padding: 20px;
     }
 
-    .tab-btn {
-        flex: 0 0 33.33%;
-        margin-bottom: 5px;
+    .key-row {
+        margin-bottom: 12px;
+        gap: 10px;
     }
 }
 
 @media (max-width: 480px) {
     .key-row {
-        margin-bottom: 8px;
+        margin-bottom: 10px;
     }
 
     .key {
-        height: 45px;
-        font-size: 14px;
+        height: 56px; /* Adjusted */
+        font-size: 18px; /* Adjusted */
+    }
+
+    .expression-input {
+        font-size: 28px; /* Adjusted */
+        padding: 14px 18px;
     }
 
     .mode-btn {
-        padding: 10px 5px;
-        font-size: 11px;
+        padding: 12px 6px;
+        font-size: 13px;
     }
 }
 
@@ -589,15 +590,15 @@ body {
 
 /* Error States */
 .error {
-    background: #ff3b30 !important;
-    color: white !important;
+    background: #fff5f5 !important; /* Lighter error background */
+    color: #c53030 !important; /* Darker error text */
     animation: shake 0.5s ease-in-out;
 }
 
 @keyframes shake {
     0%, 100% { transform: translateX(0); }
-    25% { transform: translateX(-5px); }
-    75% { transform: translateX(5px); }
+    25% { transform: translateX(-8px); } /* More pronounced shake */
+    75% { transform: translateX(8px); }
 }
 
 /* Loading Animation */
@@ -607,13 +608,13 @@ body {
 
 @keyframes pulse {
     0%, 100% { opacity: 1; }
-    50% { opacity: 0.5; }
+    50% { opacity: 0.6; } /* Subtle pulse */
 }
 
 /* Button Press Effect */
 @keyframes press {
     0% { transform: scale(1); }
-    50% { transform: scale(0.95); }
+    50% { transform: scale(0.97); } /* More noticeable press */
     100% { transform: scale(1); }
 }
 
@@ -628,4 +629,25 @@ body {
 
 .expression-input, .live-preview {
     font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+}
+
+/* Enhanced visual elements for executive presentation */
+.display-panel {
+    background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%); /* Adjusted gradient */
+}
+
+.mode-switcher {
+    background: #ffffff;
+    padding: 8px; /* Increased padding */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08); /* More subtle shadow */
+}
+
+.calculator {
+    border: none;
+    overflow: visible;
+}
+
+/* Remove the subtle brand element */
+.calculator::before {
+    display: none;
 }

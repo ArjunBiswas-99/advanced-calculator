@@ -257,34 +257,40 @@ class ButtonHandler {
      * @param {string} tab - Tab name
      */
     loadTabContent(tab) {
-        const tabContent = document.getElementById('tabContent');
-        if (!tabContent) return;
+        // Let the PanelsModule handle tab content loading
+        if (typeof PanelsModule !== 'undefined') {
+            PanelsModule.switchTab(tab);
+        } else {
+            // Fallback to internal method if PanelsModule not available
+            const tabContent = document.getElementById('tabContent');
+            if (!tabContent) return;
 
-        // Clear existing content
-        tabContent.innerHTML = '';
+            // Clear existing content
+            tabContent.innerHTML = '';
 
-        // Load content based on tab
-        switch (tab) {
-            case 'algebra':
-                this.loadAlgebraTab(tabContent);
-                break;
-            case 'calculus':
-                this.loadCalculusTab(tabContent);
-                break;
-            case 'matrix':
-                this.loadMatrixTab(tabContent);
-                break;
-            case 'complex':
-                this.loadComplexTab(tabContent);
-                break;
-            case 'stats':
-                this.loadStatsTab(tabContent);
-                break;
-            case 'units':
-                this.loadUnitsTab(tabContent);
-                break;
-            default:
-                tabContent.innerHTML = '<p>Tab content not implemented</p>';
+            // Load content based on tab
+            switch (tab) {
+                case 'algebra':
+                    this.loadAlgebraTab(tabContent);
+                    break;
+                case 'calculus':
+                    this.loadCalculusTab(tabContent);
+                    break;
+                case 'matrix':
+                    this.loadMatrixTab(tabContent);
+                    break;
+                case 'complex':
+                    this.loadComplexTab(tabContent);
+                    break;
+                case 'stats':
+                    this.loadStatsTab(tabContent);
+                    break;
+                case 'units':
+                    this.loadUnitsTab(tabContent);
+                    break;
+                default:
+                    tabContent.innerHTML = '<p>Tab content not implemented</p>';
+            }
         }
     }
 

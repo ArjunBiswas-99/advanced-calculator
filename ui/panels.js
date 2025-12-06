@@ -35,22 +35,22 @@ class PanelManager {
     registerPanels() {
         this.panels.set('basicKeys', {
             element: document.getElementById('basicKeys'),
-            modes: ['basic', 'scientific', 'graph', 'advanced', 'programmer']
+            modes: ['basic', 'programmer', 'units'] // Basic keys for basic, programmer, and units modes
         });
 
         this.panels.set('scientificKeys', {
             element: document.getElementById('scientificKeys'),
-            modes: ['scientific']
+            modes: ['scientific'] // Scientific keys for scientific mode
         });
 
         this.panels.set('advancedPanel', {
             element: document.getElementById('advancedPanel'),
-            modes: ['advanced']
+            modes: ['advanced'] // Advanced panel for advanced mode
         });
 
         this.panels.set('graphCanvas', {
             element: document.getElementById('graphCanvas'),
-            modes: ['graph']
+            modes: ['graph'] // Graph canvas for graph mode
         });
 
         // Register tabs within advanced panel
@@ -102,8 +102,17 @@ class PanelManager {
      * Set initial panel state
      */
     setInitialState() {
-        this.switchMode('basic');
-        this.switchTab('algebra');
+        // Initialize immediately if DOM is already loaded, otherwise wait
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => {
+                this.switchMode('basic');
+                this.switchTab('algebra');
+            });
+        } else {
+            // DOM is already loaded, initialize immediately
+            this.switchMode('basic');
+            this.switchTab('algebra');
+        }
     }
 
     /**
@@ -115,28 +124,35 @@ class PanelManager {
 
         this.currentMode = mode;
 
-        // Hide all panels
-        this.panels.forEach((panelInfo, panelName) => {
-            if (panelInfo.element) {
-                panelInfo.element.classList.add('hidden');
-            }
-        });
-
-        // Show panels relevant to the new mode
-        this.panels.forEach((panelInfo, panelName) => {
-            if (panelInfo.modes.includes(mode) && panelInfo.element) {
-                panelInfo.element.classList.remove('hidden');
-                panelInfo.element.classList.add('fade-in');
-            }
-        });
-
         // Mode-specific setup
         this.setupModeSpecificFeatures(mode);
 
         // Update UI indicators
         this.updateModeIndicators(mode);
 
-        console.log(`Switched to mode: ${mode}`);
+        // Render panels based on the new mode
+        this.renderPanels();
+
+        console.log(`PanelManager: Switched to mode: ${mode}`);
+    }
+
+    /**
+     * Render panels based on current mode
+     */
+    renderPanels() {
+        // Hide all panels first
+        this.panels.forEach(panel => {
+            if (panel.element) {
+                panel.element.classList.add('hidden');
+            }
+        });
+
+        // Show relevant panels for the current mode
+        this.panels.forEach((panel, name) => {
+            if (panel.modes.includes(this.currentMode) && panel.element) {
+                panel.element.classList.remove('hidden');
+            }
+        });
     }
 
     /**
@@ -224,7 +240,7 @@ class PanelManager {
         // Load tab content
         this.loadTabContent(tab);
 
-        console.log(`Switched to tab: ${tab}`);
+        console.log(`PanelManager: Switched to tab: ${tab}`);
     }
 
     /**
@@ -265,10 +281,10 @@ class PanelManager {
                     <input type="text" id="algebra-equation" placeholder="e.g., x^2 + 2*x - 3 = 0" class="equation-input">
                 </div>
                 <div class="button-group">
-                    <button class="action-btn" data-action="solve-quadratic">Solve Quadratic</button>
-                    <button class="action-btn" data-action="solve-linear">Solve Linear</button>
-                    <button class="action-btn" data-action="factor">Factor</button>
-                    <button class="action-btn" data-action="expand">Expand</button>
+                    <button class="key action-btn" data-action="solve-quadratic">Solve Quadratic</button>
+                    <button class="key action-btn" data-action="solve-linear">Solve Linear</button>
+                    <button class="key action-btn" data-action="factor">Factor</button>
+                    <button class="key action-btn" data-action="expand">Expand</button>
                 </div>
                 <div class="result-area" id="algebra-result"></div>
             </div>
@@ -291,10 +307,10 @@ class PanelManager {
                     <input type="text" id="calculus-function" placeholder="e.g., x^2 + sin(x)" class="function-input">
                 </div>
                 <div class="button-group">
-                    <button class="action-btn" data-action="derivative">d/dx</button>
-                    <button class="action-btn" data-action="integral">∫</button>
-                    <button class="action-btn" data-action="limit">Limit</button>
-                    <button class="action-btn" data-action="series">Taylor Series</button>
+                    <button class="key action-btn" data-action="derivative">d/dx</button>
+                    <button class="key action-btn" data-action="integral">∫</button>
+                    <button class="key action-btn" data-action="limit">Limit</button>
+                    <button class="key action-btn" data-action="series">Taylor Series</button>
                 </div>
                 <div class="result-area" id="calculus-result"></div>
             </div>
@@ -323,13 +339,13 @@ class PanelManager {
                     </div>
                 </div>
                 <div class="button-group">
-                    <button class="action-btn" data-action="add">A + B</button>
-                    <button class="action-btn" data-action="subtract">A - B</button>
-                    <button class="action-btn" data-action="multiply">A × B</button>
-                    <button class="action-btn" data-action="determinant">det(A)</button>
-                    <button class="action-btn" data-action="inverse">A⁻¹</button>
-                    <button class="action-btn" data-action="transpose">Aᵀ</button>
-                    <button class="action-btn" data-action="eigenvalues">Eigenvalues</button>
+                    <button class="key action-btn" data-action="add">A + B</button>
+                    <button class="key action-btn" data-action="subtract">A - B</button>
+                    <button class="key action-btn" data-action="multiply">A × B</button>
+                    <button class="key action-btn" data-action="determinant">det(A)</button>
+                    <button class="key action-btn" data-action="inverse">A⁻¹</button>
+                    <button class="key action-btn" data-action="transpose">Aᵀ</button>
+                    <button class="key action-btn" data-action="eigenvalues">Eigenvalues</button>
                 </div>
                 <div class="result-area" id="matrix-result"></div>
             </div>
@@ -358,11 +374,11 @@ class PanelManager {
                     </div>
                 </div>
                 <div class="button-group">
-                    <button class="action-btn" data-action="magnitude">|z|</button>
-                    <button class="action-btn" data-action="argument">arg(z)</button>
-                    <button class="action-btn" data-action="conjugate">z̄</button>
-                    <button class="action-btn" data-action="polar">Polar Form</button>
-                    <button class="action-btn" data-action="exponential">Exponential Form</button>
+                    <button class="key action-btn" data-action="magnitude">|z|</button>
+                    <button class="key action-btn" data-action="argument">arg(z)</button>
+                    <button class="key action-btn" data-action="conjugate">z̄</button>
+                    <button class="key action-btn" data-action="polar">Polar Form</button>
+                    <button class="key action-btn" data-action="exponential">Exponential Form</button>
                 </div>
                 <div class="result-area" id="complex-result"></div>
             </div>
@@ -385,13 +401,13 @@ class PanelManager {
                     <textarea id="stats-data" placeholder="1, 2, 3, 4, 5" rows="3"></textarea>
                 </div>
                 <div class="button-group">
-                    <button class="action-btn" data-action="mean">Mean</button>
-                    <button class="action-btn" data-action="median">Median</button>
-                    <button class="action-btn" data-action="mode">Mode</button>
-                    <button class="action-btn" data-action="stddev">Standard Deviation</button>
-                    <button class="action-btn" data-action="variance">Variance</button>
-                    <button class="action-btn" data-action="regression">Linear Regression</button>
-                    <button class="action-btn" data-action="correlation">Correlation</button>
+                    <button class="key action-btn" data-action="mean">Mean</button>
+                    <button class="key action-btn" data-action="median">Median</button>
+                    <button class="key action-btn" data-action="mode">Mode</button>
+                    <button class="key action-btn" data-action="stddev">Standard Deviation</button>
+                    <button class="key action-btn" data-action="variance">Variance</button>
+                    <button class="key action-btn" data-action="regression">Linear Regression</button>
+                    <button class="key action-btn" data-action="correlation">Correlation</button>
                 </div>
                 <div class="result-area" id="stats-result"></div>
             </div>
@@ -468,7 +484,7 @@ class PanelManager {
                     </div>
                 </div>
                 <div class="button-group">
-                    <button class="action-btn" data-action="convert">Convert</button>
+                    <button class="key action-btn" data-action="convert">Convert</button>
                 </div>
                 <div class="result-area" id="units-result"></div>
             </div>
@@ -519,7 +535,7 @@ class PanelManager {
                     result = this.handleStatsAction(action, content);
                     break;
                 case 'units':
-                    result = this.handleUnitsAction(action, content);
+                    result = this.handleUnitAction(action, content);
                     break;
                 default:
                     result = `Action "${action}" not implemented for tab "${tab}"`;

@@ -83,6 +83,11 @@ class CalculatorApp {
 
         // Update display mode indicator
         this.updateDisplay();
+        
+        // Notify other modules of mode change
+        if (typeof PanelsModule !== 'undefined') {
+            PanelsModule.switchMode(mode);
+        }
     }
 
     /**
@@ -90,25 +95,30 @@ class CalculatorApp {
      * @param {string} mode - Current mode
      */
     togglePanels(mode) {
-        const panels = {
-            basic: ['basicKeys'],
-            scientific: ['basicKeys', 'scientificKeys'],
-            graph: ['basicKeys', 'graphCanvas'],
-            advanced: ['basicKeys', 'advancedPanel'],
-            programmer: ['basicKeys'] // Programmer mode uses basic keys with conversions
-        };
-
         // Hide all panels first
         document.querySelectorAll('.keys-panel, .advanced-panel, .graph-canvas').forEach(panel => {
             panel.classList.add('hidden');
         });
 
-        // Show relevant panels
-        if (panels[mode]) {
-            panels[mode].forEach(panelId => {
-                const panel = document.getElementById(panelId);
-                if (panel) panel.classList.remove('hidden');
-            });
+        // Show relevant panels for the current mode
+        switch (mode) {
+            case 'basic':
+                document.getElementById('basicKeys').classList.remove('hidden');
+                break;
+            case 'scientific':
+                document.getElementById('basicKeys').classList.remove('hidden');
+                document.getElementById('scientificKeys').classList.remove('hidden');
+                break;
+            case 'advanced':
+                document.getElementById('advancedPanel').classList.remove('hidden');
+                break;
+            case 'graph':
+                document.getElementById('basicKeys').classList.remove('hidden');
+                document.getElementById('graphCanvas').classList.remove('hidden');
+                break;
+            case 'programmer':
+                document.getElementById('basicKeys').classList.remove('hidden');
+                break;
         }
     }
 
