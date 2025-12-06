@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Scientific Calculator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="calculator">
+        <!-- Display Panel -->
+        <div class="display-panel">
+            <div class="expression-input" id="expressionInput">
+                <span id="expressionText"></span>
+                <span class="cursor" id="cursor">|</span>
+            </div>
+            <div class="live-preview" id="livePreview"></div>
+        </div>
+
+        <!-- Mode Switcher -->
+        <div class="mode-switcher">
+            <button class="mode-btn active" data-mode="basic">Basic</button>
+            <button class="mode-btn" data-mode="scientific">Scientific</button>
+            <button class="mode-btn" data-mode="advanced">Advanced</button>
+        </div>
+
+        <!-- Scrollable Content Area -->
+        <div class="content-area">
+            <!-- Basic Keys Panel -->
+            <div class="keys-panel" id="basicKeys">
+                <div class="key-row">
+                    <button class="key clear" data-value="C">C</button>
+                    <button class="key clear" data-value="CE">CE</button>
+                    <button class="key operator" data-value="%">%</button>
+                    <button class="key operator" data-value="/">÷</button>
+                </div>
+                <div class="key-row">
+                    <button class="key number" data-value="7">7</button>
+                    <button class="key number" data-value="8">8</button>
+                    <button class="key number" data-value="9">9</button>
+                    <button class="key operator" data-value="*">×</button>
+                </div>
+                <div class="key-row">
+                    <button class="key number" data-value="4">4</button>
+                    <button class="key number" data-value="5">5</button>
+                    <button class="key number" data-value="6">6</button>
+                    <button class="key operator" data-value="-">−</button>
+                </div>
+                <div class="key-row">
+                    <button class="key number" data-value="1">1</button>
+                    <button class="key number" data-value="2">2</button>
+                    <button class="key number" data-value="3">3</button>
+                    <button class="key operator" data-value="+">+</button>
+                </div>
+                <div class="key-row">
+                    <button class="key number zero" data-value="0">0</button>
+                    <button class="key decimal" data-value=".">.</button>
+                    <button class="key equals" data-value="=">=</button>
+                </div>
+            </div>
+
+            <!-- Scientific Keys Panel -->
+            <div class="keys-panel hidden" id="scientificKeys">
+                <div class="key-row">
+                    <button class="key function" data-value="sin">sin</button>
+                    <button class="key function" data-value="cos">cos</button>
+                    <button class="key function" data-value="tan">tan</button>
+                    <button class="key parentheses" data-value="(">(</button>
+                    <button class="key parentheses" data-value=")">)</button>
+                </div>
+                <div class="key-row">
+                    <button class="key function" data-value="asin">asin</button>
+                    <button class="key function" data-value="acos">acos</button>
+                    <button class="key function" data-value="atan">atan</button>
+                    <button class="key constant" data-value="π">π</button>
+                    <button class="key operator" data-value="^">^</button>
+                </div>
+                <div class="key-row">
+                    <button class="key function" data-value="log">log</button>
+                    <button class="key function" data-value="ln">ln</button>
+                    <button class="key function" data-value="sqrt">√</button>
+                    <button class="key constant" data-value="e">e</button>
+                    <button class="key operator" data-value="!">!</button>
+                </div>
+                <div class="key-row">
+                    <button class="key number" data-value="7">7</button>
+                    <button class="key number" data-value="8">8</button>
+                    <button class="key number" data-value="9">9</button>
+                    <button class="key operator" data-value="/">÷</button>
+                    <button class="key clear" data-value="C">C</button>
+                </div>
+                <div class="key-row">
+                    <button class="key number" data-value="4">4</button>
+                    <button class="key number" data-value="5">5</button>
+                    <button class="key number" data-value="6">6</button>
+                    <button class="key operator" data-value="*">×</button>
+                    <button class="key clear" data-value="CE">CE</button>
+                </div>
+                <div class="key-row">
+                    <button class="key number" data-value="1">1</button>
+                    <button class="key number" data-value="2">2</button>
+                    <button class="key number" data-value="3">3</button>
+                    <button class="key operator" data-value="-">−</button>
+                    <button class="key equals" data-value="=" rowspan="2">=</button>
+                </div>
+                <div class="key-row">
+                    <button class="key number zero" data-value="0">0</button>
+                    <button class="key decimal" data-value=".">.</button>
+                    <button class="key operator" data-value="+">+</button>
+                </div>
+            </div>
+
+            <!-- Advanced Function Panel -->
+            <div class="advanced-panel hidden" id="advancedPanel">
+                <div class="advanced-tabs">
+                    <button class="tab-btn active" data-tab="algebra">Algebra</button>
+                    <button class="tab-btn" data-tab="calculus">Calculus</button>
+                    <button class="tab-btn" data-tab="matrix">Matrix</button>
+                    <button class="tab-btn" data-tab="stats">Stats</button>
+                </div>
+                <div class="tab-content" id="tabContent">
+                    <!-- Tab contents will be dynamically loaded -->
+                </div>
+            </div>
+        </div>
+
+        <!-- History Panel -->
+        <div class="history-panel" id="historyPanel">
+            <div class="history-header">History</div>
+            <div class="history-list" id="historyList"></div>
+        </div>
+    </div>
+
+    <script src="parser/tokenizer.js"></script>
+    <script src="parser/ast.js"></script>
+    <script src="parser/evaluator.js"></script>
+    <script src="utils/constants.js"></script>
+    <script src="utils/precision.js"></script>
+    <script src="utils/helpers.js"></script>
+    <script src="ui/display.js"></script>
+    <script src="ui/buttons.js"></script>
+    <script src="ui/panels.js"></script>
+    <script src="modules/algebra.js"></script>
+    <script src="modules/calculus.js"></script>
+    <script src="modules/matrix.js"></script>
+    <script src="modules/complex.js"></script>
+    <script src="modules/graphing.js"></script>
+    <script src="modules/stats.js"></script>
+    <script src="modules/programmer.js"></script>
+    <script src="modules/units.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
