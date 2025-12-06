@@ -54,6 +54,28 @@ class ButtonHandler {
         document.querySelectorAll('.tab-btn[data-tab]').forEach(button => {
             button.addEventListener('click', (e) => this.handleTabSwitch(e));
         });
+
+        // Bind graph controls if they exist
+        const plotBtn = document.getElementById('plotBtn');
+        const clearGraphBtn = document.getElementById('clearGraphBtn');
+        const zoomInBtn = document.getElementById('zoomInBtn');
+        const zoomOutBtn = document.getElementById('zoomOutBtn');
+
+        if (plotBtn) {
+            plotBtn.addEventListener('click', () => this.handleGraphPlot());
+        }
+
+        if (clearGraphBtn) {
+            clearGraphBtn.addEventListener('click', () => this.handleGraphClear());
+        }
+
+        if (zoomInBtn) {
+            zoomInBtn.addEventListener('click', () => this.handleGraphZoom(1.2));
+        }
+
+        if (zoomOutBtn) {
+            zoomOutBtn.addEventListener('click', () => this.handleGraphZoom(0.8));
+        }
     }
 
     /**
@@ -210,7 +232,7 @@ class ButtonHandler {
         // Show relevant panels based on mode
         const panelMap = {
             basic: ['basicKeys'],
-            scientific: ['basicKeys', 'scientificKeys'],
+            scientific: ['scientificKeys'], // Only show scientific keys in scientific mode
             graph: ['basicKeys', 'graphCanvas'],
             advanced: ['basicKeys', 'advancedPanel'],
             programmer: ['basicKeys'] // Programmer mode uses basic keys with special handling
@@ -250,6 +272,35 @@ class ButtonHandler {
 
         // Trigger tab change event
         this.triggerEvent('tabChanged', { tab: tab });
+    }
+
+    /**
+     * Handle graph plot action
+     */
+    handleGraphPlot() {
+        const functionInput = document.getElementById('functionInput');
+        if (functionInput && typeof GraphingModule !== 'undefined') {
+            GraphingModule.plotFunction(functionInput.value);
+        }
+    }
+
+    /**
+     * Handle graph clear action
+     */
+    handleGraphClear() {
+        if (typeof GraphingModule !== 'undefined') {
+            GraphingModule.clear();
+        }
+    }
+
+    /**
+     * Handle graph zoom action
+     * @param {number} factor - Zoom factor
+     */
+    handleGraphZoom(factor) {
+        if (typeof GraphingModule !== 'undefined') {
+            GraphingModule.zoom(factor);
+        }
     }
 
     /**

@@ -153,6 +153,20 @@ class PanelManager {
                 panel.element.classList.remove('hidden');
             }
         });
+
+        // Special handling for scientific mode to ensure basic keys are hidden
+        if (this.currentMode === 'scientific') {
+            const basicKeys = document.getElementById('basicKeys');
+            if (basicKeys) {
+                basicKeys.classList.add('hidden');
+            }
+        } else if (this.currentMode === 'basic') {
+            // Ensure scientific keys are hidden in basic mode
+            const scientificKeys = document.getElementById('scientificKeys');
+            if (scientificKeys) {
+                scientificKeys.classList.add('hidden');
+            }
+        }
     }
 
     /**

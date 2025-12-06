@@ -1,40 +1,47 @@
-/* Advanced Scientific Calculator - Executive Professional Design */
+/* Modern Scientific Calculator - Sleek Design */
 
-/* CSS Custom Properties for Executive Theme */
+/* CSS Custom Properties for Modern Theme */
 :root {
-    --primary-bg: #ffffff;
-    --secondary-bg: #f8fafc;
-    --accent-bg: #f1f5f9;
-    --display-bg: #1a202c; /* Darker display background */
-    --display-text: #e2e8f0;
-    --border-color: #e2e8f0;
-    --text-primary: #1a202c; /* Darker text */
-    --text-secondary: #4a5568;
-    --text-muted: #718096;
-    --shadow-light: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0.14);
-    --shadow-medium: 0 4px 6px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.08);
-    --shadow-heavy: 0 15px 25px rgba(0, 0, 0, 0.1), 0 5px 10px rgba(0, 0, 0, 0.05);
-    --gradient-bg: linear-gradient(135deg, #f0f4f8 0%, #d9e2ec 100%); /* Softer gradient */
-    --radius-sm: 6px;
-    --radius-md: 8px;
-    --radius-lg: 12px;
-    --radius-xl: 16px;
-    --number-bg: #edf2f7;
-    --number-hover: #e2e8f0;
-    --operator-bg: #4299e1; /* Brighter blue */
-    --operator-hover: #3182ce;
-    --function-bg: #805ad5; /* Richer purple */
-    --function-hover: #6b46c1;
-    --constant-bg: #38b2ac; /* Teal */
-    --constant-hover: #319795;
-    --clear-bg: #fc8181; /* Lighter red */
-    --clear-hover: #e53e3e;
-    --equals-bg: #48bb78; /* Brighter green */
-    --equals-hover: #38a169;
-    --zero-bg: #edf2f7;
-    --zero-hover: #e2e8f0;
-    --active-mode: #4299e1;
+    --primary-bg: #1e1e2e;
+    --secondary-bg: #25283d;
+    --accent-bg: #2d3047;
+    --display-bg: #0f0f1b;
+    --display-text: #ffffff;
+    --border-color: #4a4d6c;
+    --text-primary: #ffffff;
+    --text-secondary: #a0a0c0;
+    --text-muted: #6c6c8a;
+    --shadow-light: 0 2px 10px rgba(0, 0, 0, 0.3);
+    --shadow-medium: 0 4px 15px rgba(0, 0, 0, 0.4);
+    --shadow-heavy: 0 10px 30px rgba(0, 0, 0, 0.5);
+    --gradient-bg: linear-gradient(135deg, #2c2f4b 0%, #1e1e2e 100%);
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-xl: 20px;
+    --number-bg: #3a3d5a;
+    --number-hover: #474b6c;
+    --operator-bg: #ff9500;
+    --operator-hover: #ffaa33;
+    --function-bg: #3a86ff;
+    --function-hover: #5d9bff;
+    --constant-bg: #8338ec;
+    --constant-hover: #9d5cff;
+    --clear-bg: #fb5607;
+    --clear-hover: #ff712a;
+    --equals-bg: #06d6a0;
+    --equals-hover: #2ae8b3;
+    --zero-bg: #3a3d5a;
+    --zero-hover: #474b6c;
+    --active-mode: #ff9500;
     --active-mode-text: white;
+    --active-tab: #ff9500;
+    --active-tab-text: white;
+    --history-bg: #25283d;
+    --history-hover: #2d3047;
+    --key-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    --key-active-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+    --transition-speed: 0.2s;
 }
 
 /* Global Styles */
@@ -75,9 +82,9 @@ body {
 
 /* Fixed Display Panel */
 .display-panel {
-    background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%); /* Adjusted gradient */
+    background: linear-gradient(135deg, var(--display-bg) 0%, #1a1c2f 100%);
     padding: 36px 28px; /* Increased padding */
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid var(--border-color);
     position: relative;
 }
 
@@ -91,18 +98,18 @@ body {
     justify-content: flex-end;
     margin-bottom: 18px; /* Increased margin */
     padding: 18px 22px; /* Increased padding */
-    background: rgba(255, 255, 255, 0.08); /* Slightly more prominent background */
+    background: rgba(0, 0, 0, 0.2); /* Darker background */
     border-radius: var(--radius-lg);
     position: relative;
     transition: all 0.2s ease;
     font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace; /* More modern monospace stack */
     letter-spacing: -0.03em; /* Tighter letter spacing */
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .expression-input:focus-within {
     border-color: var(--operator-bg); /* Use accent color for focus */
-    box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.3); /* Match accent color */
+    box-shadow: 0 0 0 3px rgba(255, 149, 0, 0.3); /* Match accent color */
 }
 
 #expressionText {
@@ -135,22 +142,22 @@ body {
     text-align: right;
     min-height: 30px; /* Slightly taller */
     padding: 9px 22px; /* Increased padding */
-    background: rgba(255, 255, 255, 0.06);
+    background: rgba(0, 0, 0, 0.15); /* Darker background */
     border-radius: var(--radius-md);
     font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
     transition: all 0.3s ease;
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 /* Fixed Mode Switcher */
 .mode-switcher {
     display: flex;
-    background: #ffffff;
+    background: var(--secondary-bg);
     border-bottom: 1px solid var(--border-color);
     padding: 8px; /* Increased padding */
     gap: 6px;
     position: relative;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08); /* More subtle shadow */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .mode-btn {
@@ -179,7 +186,7 @@ body {
 }
 
 .mode-btn:hover:not(.active) {
-    background: var(--secondary-bg);
+    background: var(--accent-bg);
     color: var(--text-primary);
 }
 
@@ -381,7 +388,7 @@ body {
 }
 
 .tab-btn:hover:not(.active) {
-    background: var(--secondary-bg);
+    background: var(--accent-bg);
     color: var(--text-primary);
 }
 
@@ -633,13 +640,13 @@ body {
 
 /* Enhanced visual elements for executive presentation */
 .display-panel {
-    background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%); /* Adjusted gradient */
+    background: linear-gradient(135deg, var(--display-bg) 0%, #1a1c2f 100%);
 }
 
 .mode-switcher {
-    background: #ffffff;
+    background: var(--secondary-bg);
     padding: 8px; /* Increased padding */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08); /* More subtle shadow */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .calculator {

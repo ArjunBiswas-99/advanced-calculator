@@ -88,6 +88,21 @@ class CalculatorApp {
         if (typeof PanelsModule !== 'undefined') {
             PanelsModule.switchMode(mode);
         }
+
+        // Update calculator state for the new mode
+        this.onModeChange(mode);
+    }
+
+    /**
+     * Handle mode change specific logic
+     * @param {string} mode - The new mode
+     */
+    onModeChange(mode) {
+        // Clear expression when switching to programmer mode to avoid conflicts
+        if (mode === 'programmer' && this.currentMode !== 'programmer') {
+            this.clearAll();
+        }
+        // Add any other mode-specific initialization here
     }
 
     /**
@@ -106,7 +121,7 @@ class CalculatorApp {
                 document.getElementById('basicKeys').classList.remove('hidden');
                 break;
             case 'scientific':
-                document.getElementById('basicKeys').classList.remove('hidden');
+                document.getElementById('basicKeys').classList.add('hidden'); // Hide basic keys in scientific mode
                 document.getElementById('scientificKeys').classList.remove('hidden');
                 break;
             case 'advanced':
