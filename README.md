@@ -1,6 +1,6 @@
 # Advanced Scientific Calculator
 
-A modern, feature-rich scientific calculator built with HTML, CSS, and JavaScript. This calculator provides a sleek, professional interface with comprehensive mathematical capabilities suitable for students, professionals, and researchers. \
+A modern, feature-rich scientific calculator built with HTML, CSS, and JavaScript. This calculator provides a sleek, professional interface with comprehensive mathematical capabilities suitable for students, professionals, and researchers.
 
 ## Features
 
